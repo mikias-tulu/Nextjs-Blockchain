@@ -51,7 +51,4 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.setHeader("Allow", ["POST", "GET"]);
-  res.status(405).json({ error: `Method ${req.method} Not Allowed` });
-}
+
