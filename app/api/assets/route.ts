@@ -12,7 +12,7 @@ const getDatabase = async () => {
   return client.db(DATABASE_NAME);
 };
 
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (req: Request) => {
   try {
     const assets = await getAllAssets();
 
@@ -21,13 +21,13 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       assets,
     };
     
-    return NextResponse.json(json_response);
+    return Response.json(json_response);
   } catch (error: any) {
     return createErrorResponse(error.message, 500);
   }
 }
 
-export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
+export const POST = async (req: Request, res: Response) => {
   try {
     const db = await getDatabase();
     const collection = db.collection(COLLECTION_NAME);
@@ -39,7 +39,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
       const result = await collection.insertMany(req.body);
       console.log(`${result.insertedCount} assets synced successfully`);
 
-      res.status(200).json({
+      return Response.json({
         message: `${result.insertedCount} assets synced successfully`,
       });
     } else {
@@ -47,7 +47,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } catch (error) {
     console.error("Error syncing assets data:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    return Response.json({ error: "Internal Server Error" });
   }
 };
 
