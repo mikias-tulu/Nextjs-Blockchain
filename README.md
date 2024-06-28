@@ -14,6 +14,25 @@ pnpm dev
 bun dev
 ```
 
+## API Reference
+
+#### Get all Assets Data
+
+```
+Method GET
+Api endPoint -/api/assets
+```
+
+## Linters, Prettier
+
+```
+$ npm run prettier:check
+$ npm run prettier:fix
+$ npm run lint:check
+$ npm run lint:fix
+```
+
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
